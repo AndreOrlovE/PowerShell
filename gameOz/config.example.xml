@@ -1,0 +1,85 @@
+<!-- file.xml -->
+<config>
+	<system version="v3.9.0">
+		<!-- set color (e.g Red, Green, Yellow or #251CFD) for gameOz and project environment-->
+		<env color="Red" group="0" warining="0">PROJECT LIVE</env>
+		<!-- email settings-->
+		<email enabled="0" server="smtp.server.com" from="FROM_ADDRESS@email.com" subj="[PROJECT][LIVE] GameOz">youremail@email.com</email>
+	</system>
+        <services>
+		<server name="SRV-NAME1">
+			<service name="ServiceName1" start_wait="false" stop_wait="false">whatever_you_want</service>
+		</server>
+		<server name="SRV-NAME2">
+			<service name="ServiceName2" start_wait="true" stop_wait="true">whatever_you_want</service>
+		</server>
+	</services>
+	<!-- check for processes -->
+	<processes>
+		<!-- server DNS name -->
+		<server name="SRV-NAME1">
+			<!-- process name and alias -->
+			<process name="ProcesssName1">whatever_you_want</process>
+		</server>
+		<server name="SRV-NAME2">
+			<!-- process name and alias -->
+			<process name="ProcesssName2">whatever_you_want</process>
+		</server>
+	</processes>
+	<!-- schedule tasks -->
+	<tasks>
+		<!-- server DNS name. If task is interactive (Run only when user is logged on) - set user name-->
+		<server name="SRV-NAME1" rdpuser="account_name">
+			<!-- task name-->
+			<task name="TaskName1" >whatever_you_want</task>
+		</server>
+		<server name="SRV-NAME2" rdpuser="account_name">
+			<!-- task name-->
+			<task name="TaskName2" >whatever_you_want</task>
+		</server>
+		<!-- if task is set Run whether user is logged on or not - leave rdpuser empty -->
+		<server name="SRV-NAME3" rdpuser="">
+			<task name="TaskName3" >whatever_you_want</task>
+		</server>
+	</tasks>
+	<!-- firewall rule : enable / disable -->
+	<firewall>
+		<server name="SRV-NAME1">
+			<!-- rule name -->
+			<rule name="Allow_tcp_6800_acc_Open">whatever_you_want</rule>
+		</server>
+	</firewall>
+	<!-- folders - check size and files count -->
+	<folders>
+		<!-- group 1 -->
+		<!-- set folders and files to exclude them from size and count calculation (e.g. in case of DFS-R) -->
+		<group name="Group1" folders_exclude="logs, tmp, config" files_exclude="~*, *.bak, *.tmp, *.dmp, *.txt">
+			<!-- server DNS name and local path -->
+			<folder server="SRV-NAME" path="d:\_DFS\main\">main</folder>
+			<folder server="SRV-NAME1" path="d:\main\">main01</folder>
+			<folder server="SRV-NAME2" path="d:\main\">main02</folder>
+		</group>
+		<!-- group 2 -->
+		<group name="Group2" folders_exclude="" files_exclude="~*, *.bak, *.exe">
+			<!-- server DNS name and local path -->
+			<folder server="SRV-NAME" path="d:\_DFS\test\">test</folder>
+			<folder server="SRV-NAME1" path="d:\test\">test01</folder>
+			<folder server="SRV-NAME2" path="d:\test\">test02</folder>
+		</group>
+	</folders>
+	<!-- servers - uptime, reboot -->
+	<servers>
+		<server name="SRV-NAME1">whatever_you_want</server>
+		<server name="SRV-NAME2">whatever_you_want</server>
+		<server name="SRV-NAME3">whatever_you_want</server>
+	</servers>
+	<!-- custom buttons -->
+	<!-- cmd : command or script path -->
+	<!-- confirm: 1- show confirm window, 0 - no confirmation -->
+	<!-- you can create as many buttons as you need, but there is a limit to display them all -->
+	<buttons>
+		<button cmd="Copy-Item -Path d:\_CLIENT\sync.flag -Destination \\server1.domain.local\CDN\" confirm="1">Copy Flag</button>
+		<button cmd="ipconfig" confirm="0">Ipconfig</button>
+        <button cmd="C:\script\start.bat" confirm="0">Start</button>
+	</buttons>
+</config>
